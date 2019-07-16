@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { Grid, Segment,Form } from "semantic-ui-react";
-{/* <p>{this.props.match.params.stagename}</p> */}
+
 class Login extends Component {
   constructor(props){
     super(props)
   }
   render() {
     return (
-      
       <Grid
         textAlign="center"
         style={{ height: "100vh" }}

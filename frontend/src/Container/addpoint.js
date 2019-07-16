@@ -1,2 +1,6 @@
 import React,{Component} from 'react';
-{/* <p>{this.props.match.params.stagename}</p> */}
+export default class extends Component{
+    render(){
+        return <p>{this.props.match.params.stagename}</p>
+    }
+}

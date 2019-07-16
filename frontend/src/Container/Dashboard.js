@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Grid, Segment, List, Header } from "semantic-ui-react";
+import { Grid, Segment, List, Header, Feed } from "semantic-ui-react";
 import RankListItem from "../Component/RankListItem";
+import Tweet from "../Component/Tweet";
 const teamData = {
   2: { score: 100 },
   1: { score: 200 },
@@ -28,7 +29,7 @@ class Dashboard extends Component {
     );
     console.log(teamRank);
     return (
-      <Grid textAlign="center" style={{ height: "100vh",margin: "30px" }}>
+      <Grid textAlign="center" style={{ height: "100vh", margin: "30px" }}>
         <Grid.Column width={6}>
           <Segment raised>
             <Header as="h1">Rank</Header>
@@ -55,28 +56,17 @@ class Dashboard extends Component {
               </List>
             </Segment>
           </Grid.Row>
-          <Grid.Row style={{margin:'10vh 0vh'}}>
+          <Grid.Row style={{ margin: "10vh 0vh" }}>
             <Segment>
-              <List style={{ display: "flex", flexWrap: "nowrap" }}>
-                <List.Item>
-                  <List.Content>
-                    <List.Header style={{ textAlign: "left" }}>
-                      Rachel
-                    </List.Header>
-                    <List.Description>
-                      Last seen watching{" "}
-                      <a>
-                        <b>Arrested Development</b>
-                      </a>{" "}
-                      just now.
-                    </List.Description>
-                  </List.Content>
-                </List.Item>
-              </List>
+              {/* <List style={{ display: "flex", flexWrap: "nowrap" }}> */}
+              <Feed>
+                <Tweet teamName="team1" StageName="stage1" Points={10} />
+              </Feed>
+              {/* </List> */}
             </Segment>
           </Grid.Row>
         </Grid.Column>
-        <Grid.Row >
+        <Grid.Row>
           <Grid.Column width={6} />
           <Grid.Column width={6} />
         </Grid.Row>
