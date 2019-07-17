@@ -3,6 +3,8 @@ import { Grid, Segment, List, Header, Feed } from "semantic-ui-react";
 import RankListItem from "../Component/RankListItem";
 import Tweet from "../Component/Tweet";
 import { connect } from "react-redux";
+import io from "socket.io-client";
+import { get_data } from "../redux/actions";
 // const teamData = {
 //   2: { score: 100 },
 //   1: { score: 200 },
@@ -22,15 +24,37 @@ import { connect } from "react-redux";
 //   k: {show: false }
 // };
 const mapStateToProps = state => {
-  return { Commissions: state.Commissions,teamData: state.teamData,Tweets: state.Tweets };
+  return {
+    Commissions: state.Commissions,
+    teamData: state.teamData,
+    Tweets: state.Tweets
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return { get_data: data => dispatch(get_data(data)) };
 };
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+  }
+  componentWillMount() {
+    const ws = io.connect("http://localhost:8000");
+    fetch("/api")
+      .then(res => res.json())
+      .then(res => {
+        this.props.get_data(res);
+      });
+  }
   render() {
-    const { Commissions,teamData,Tweets } = this.props;
+    const { Commissions, teamData, Tweets } = this.props;
+    if(!Commissions||!teamData||!Tweets){
+      return <p>loading</p>
+    }
     const teamRank = Object.keys(teamData).sort(
       (a, b) => teamData[b].score - teamData[a].score
     );
     //console.log(teamRank);
+
     return (
       <Grid textAlign="center" style={{ height: "100vh" }}>
         <Grid.Column width={6}>
@@ -67,7 +91,9 @@ class Dashboard extends Component {
             <Segment>
               {/* <List style={{ display: "flex", flexWrap: "nowrap" }}> */}
               <Feed>
-                {Tweets.map(tweet => <Tweet {...tweet} />)}
+                {Tweets.map(tweet => (
+                  <Tweet {...tweet} />
+                ))}
               </Feed>
               {/* </List> */}
             </Segment>
@@ -82,5 +108,8 @@ class Dashboard extends Component {
     );
   }
 }
-const connectedDashboard = connect(mapStateToProps)(Dashboard);
+const connectedDashboard = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard);
 export default connectedDashboard;
