@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Grid, Segment,Form } from "semantic-ui-react";
-
+import { Grid, Segment,Form ,Button} from "semantic-ui-react";
+import {Link} from 'react-router-dom';
 class Login extends Component {
   constructor(props){
     super(props)
+    this.state={stagename: ''}
   }
   render() {
     return (
@@ -17,13 +18,9 @@ class Login extends Component {
                   <Form>
                   <Form.Field>
                       <label>關卡名稱</label>
-                      <Form.Input></Form.Input>
+                      <Form.Input onChange={e=> this.setState({stagename: e.target.value})}></Form.Input>
                     </Form.Field>
-                    <Form.Field>
-                      <label>SecretPass</label>
-                      <Form.Input></Form.Input>
-                    </Form.Field>
-                    <Form.Button color='teal'>Submit</Form.Button>
+                    <Button as={Link} to={`${this.props.match.url}/${this.state.stagename}`} color='teal'>Submit</Button>
                   </Form>
               </Segment>
           </Grid.Column>

@@ -2,40 +2,47 @@ import React, { Component } from "react";
 import { Grid, Segment, List, Header, Feed } from "semantic-ui-react";
 import RankListItem from "../Component/RankListItem";
 import Tweet from "../Component/Tweet";
-const teamData = {
-  2: { score: 100 },
-  1: { score: 200 },
-  3: { score: 300 },
-  4: { score: 300 },
-  5: { score: 300 },
-  6: { score: 300 },
-  7: { score: 300 },
-  8: { score: 300 },
-  9: { score: 300 },
-  10: { score: 300 },
-  11: { score: 300 },
-  12: { score: 300 }
-};
-const Commissions = {
-  1: { content: "f", show: true },
-  2: { content: "u", show: true },
-  3: { content: "c", show: true },
-  4: { content: "k", show: false }
+import { connect } from "react-redux";
+// const teamData = {
+//   2: { score: 100 },
+//   1: { score: 200 },
+//   3: { score: 500 },
+//   4: { score: 300 },
+//   5: { score: 400 },
+//   6: { score: 300 },
+//   7: { score: 300 },
+//   8: { score: 700 },
+//   9: { score: 900 },
+//   10: { score: 300 }
+// };
+// const Commissions = {
+//   f: {show: true},
+//   u: {show: true },
+//   c: {show: true },
+//   k: {show: false }
+// };
+const mapStateToProps = state => {
+  return { Commissions: state.Commissions,teamData: state.teamData,Tweets: state.Tweets };
 };
 class Dashboard extends Component {
   render() {
+    const { Commissions,teamData,Tweets } = this.props;
     const teamRank = Object.keys(teamData).sort(
-      (a, b) => teamData[a].score - teamData[b].score
+      (a, b) => teamData[b].score - teamData[a].score
     );
-    console.log(teamRank);
+    //console.log(teamRank);
     return (
-      <Grid textAlign="center" style={{ height: "100vh", margin: "30px" }}>
+      <Grid textAlign="center" style={{ height: "100vh" }}>
         <Grid.Column width={6}>
           <Segment raised>
             <Header as="h1">Rank</Header>
             <List relaxed divided>
               {teamRank.map((teamid, rank) => (
-                <RankListItem rank={rank + 1} teamid={teamid} />
+                <RankListItem
+                  rank={rank + 1}
+                  teamid={teamid}
+                  score={teamData[teamid].score}
+                />
               ))}
             </List>
           </Segment>
@@ -45,11 +52,11 @@ class Dashboard extends Component {
             <Segment raised>
               <Header as="h1">Commissions</Header>
               <List relaxed divided>
-                {Object.values(Commissions).map(
-                  (commision, id) =>
-                    commision.show && (
+                {Object.keys(Commissions).map(
+                  commission =>
+                    Commissions[commission].show && (
                       <List.Item>
-                        <List.Header as="h2">{commision.content}</List.Header>
+                        <List.Header as="h2">{commission}</List.Header>
                       </List.Item>
                     )
                 )}
@@ -60,7 +67,7 @@ class Dashboard extends Component {
             <Segment>
               {/* <List style={{ display: "flex", flexWrap: "nowrap" }}> */}
               <Feed>
-                <Tweet teamName="team1" StageName="stage1" Points={10} />
+                {Tweets.map(tweet => <Tweet {...tweet} />)}
               </Feed>
               {/* </List> */}
             </Segment>
@@ -75,4 +82,5 @@ class Dashboard extends Component {
     );
   }
 }
-export default Dashboard;
+const connectedDashboard = connect(mapStateToProps)(Dashboard);
+export default connectedDashboard;

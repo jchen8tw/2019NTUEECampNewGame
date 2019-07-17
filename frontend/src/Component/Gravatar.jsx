@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-const colors = ['red','orangered','orange','darkorange','gold','green','lightseagreen','dodgerblue','darkblue','darkmagenta','indigo','black'];
+const colors = ['brown','red','orange','gold','green','lightseagreen','dodgerblue','darkblue','darkmagenta','indigo'];
 export default function(props) {
   //teamid should be interger 0-2
   const rank = props.rank;

@@ -9,7 +9,7 @@ export default props => {
         <Feed.Date>now</Feed.Date>
         <Feed.Summary>
           <b>{teamName}</b> 在 {StageName} {Points > 0 ? "獲得" : "損失"} 了{" "}
-          {Points} 分
+          {Math.abs(Points)} 金幣
         </Feed.Summary>
       </Feed.Content>
     </Feed.Event>
