@@ -20,7 +20,7 @@ class Login extends Component {
                       <label>關卡名稱</label>
                       <Form.Input onChange={e=> this.setState({stagename: e.target.value})}></Form.Input>
                     </Form.Field>
-                    <Button as={Link} to={`${this.props.match.url}/${this.state.stagename}`} color='teal'>Submit</Button>
+                    {this.state.stagename==''? <Button color='teal' children='Submit'/> : <Button as={Link} to={`${this.props.match.url}/${this.state.stagename}`} color='teal'>Submit</Button>}
                   </Form>
               </Segment>
           </Grid.Column>

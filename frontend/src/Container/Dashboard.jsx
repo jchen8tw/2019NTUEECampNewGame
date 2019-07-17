@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Grid, Segment, List, Header, Feed } from "semantic-ui-react";
+import { Grid, Segment, List, Header, Feed, Button } from "semantic-ui-react";
+import {Link} from 'react-router-dom';
 import RankListItem from "../Component/RankListItem";
 import Tweet from "../Component/Tweet";
 import { connect } from "react-redux";
@@ -38,17 +39,25 @@ class Dashboard extends Component {
     super(props);
   }
   componentWillMount() {
-    const ws = io.connect("http://localhost:8000");
+    const ws = io.connect("/");
     fetch("/api")
       .then(res => res.json())
       .then(res => {
         this.props.get_data(res);
       });
+    ws.on("operation_updated", data => {
+      console.log("updated");
+      fetch("/api")
+        .then(res => res.json())
+        .then(res => {
+          this.props.get_data(res);
+        });
+    });
   }
   render() {
     const { Commissions, teamData, Tweets } = this.props;
-    if(!Commissions||!teamData||!Tweets){
-      return <p>loading</p>
+    if (!Commissions || !teamData || !Tweets) {
+      return <p>loading</p>;
     }
     const teamRank = Object.keys(teamData).sort(
       (a, b) => teamData[b].score - teamData[a].score
@@ -69,6 +78,9 @@ class Dashboard extends Component {
                 />
               ))}
             </List>
+          </Segment>
+          <Segment>
+            <Button fluid color="facebook" as={Link} to='/login'>Login</Button>
           </Segment>
         </Grid.Column>
         <Grid.Column width={6}>

@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Segment, Grid, Form, Label, List, Header } from "semantic-ui-react";
 import OptListItem from "../Component/OptListItem";
 import { connect } from "react-redux";
-import { submit_operation, delete_operation } from "../redux/actions";
+import { submit_operation, delete_operation, get_data } from "../redux/actions";
 import uuid from "uuid/v4";
+import io from "socket.io-client";
 // const operation = {
 //   "b2d48c20-520f-42e5-9774-fa7e07a3805b": { teamid: 1, addpoints: 10 },
 //   'e1f8180b-a65d-4456-b915-25dc26dfd97e': {teamid: 2, addpoints:-10 }
@@ -14,7 +15,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     submit_operation: data => dispatch(submit_operation(data)),
-    deleteopt: data => dispatch(delete_operation(data))
+    deleteopt: data => dispatch(delete_operation(data)),
+    get_data: data => dispatch(get_data(data))
   };
 };
 class Operations extends Component {
@@ -22,6 +24,18 @@ class Operations extends Component {
     super(props);
     this.teaminput = React.createRef();
     this.addpointsinput = React.createRef();
+  }
+  componentWillMount() {
+    const ws = io("/");
+    this.ws = ws;
+    fetch("/api")
+      .then(res => res.json())
+      .then(res => this.props.get_data(res));
+    ws.on("operation_updated", () => {
+      fetch("/api")
+        .then(res => res.json())
+        .then(res => this.props.get_data(res));
+    });
   }
   handle_submit = () => {
     if (
@@ -39,18 +53,29 @@ class Operations extends Component {
       this.addpointsinput.current.value = "";
       return;
     }
-    this.props.submit_operation({
-      uuid: uuid(),
-      teamid: parseInt(this.teaminput.current.value),
-      addpoints: parseInt(this.addpointsinput.current.value),
-      stagename: this.props.match.params.stagename
-    });
+    // this.props.submit_operation({
+    //   uuid: uuid(),
+    //   teamid: parseInt(this.teaminput.current.value),
+    //   addpoints: parseInt(this.addpointsinput.current.value),
+    //   stagename: this.props.match.params.stagename
+    // });
+    if (!!this.ws) {
+      this.ws.emit("submit_operation", {
+        uuid: uuid(),
+        teamid: parseInt(this.teaminput.current.value),
+        addpoints: parseInt(this.addpointsinput.current.value),
+        stagename: this.props.match.params.stagename
+      });
+    }
     this.setState(() => ({ teamid: "", addpoints: "" }));
     this.teaminput.current.value = "";
     this.addpointsinput.current.value = "";
   };
   render() {
     const { operation } = this.props;
+    if (!operation) {
+      return <p> loading</p>;
+    }
     let stage = operation[`${this.props.match.params.stagename}`];
     if (!stage) {
       //if there is no corresponding operations
@@ -97,7 +122,7 @@ class Operations extends Component {
                 {...stage[opt]}
                 key={opt}
                 deleteopt={() =>
-                  this.props.deleteopt({
+                  this.ws.emit('delete_operation',{
                     stagename: this.props.match.params.stagename,
                     teamid: stage[opt].teamid,
                     addpoints: stage[opt].addpoints,

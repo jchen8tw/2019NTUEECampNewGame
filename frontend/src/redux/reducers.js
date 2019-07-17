@@ -1,5 +1,10 @@
-import { DISPLAY_COMMISSION, SUBMIT_OPERATION, DELETE_OPERATION, GET_DATA } from "./actionsTypes";
-const initial_state = {}
+import {
+  DISPLAY_COMMISSION,
+  SUBMIT_OPERATION,
+  DELETE_OPERATION,
+  GET_DATA
+} from "./actionsTypes";
+const initial_state = {};
 // const initial_state = {
 //   Commissions: {
 //     f: { show: true },
@@ -31,7 +36,7 @@ const initial_state = {}
 //   }
 // };
 function rootReducer(state = initial_state, action) {
-    console.log(state);
+  console.log(state);
   if (action.type === DISPLAY_COMMISSION) {
     let newObj = JSON.parse(JSON.stringify(state));
     newObj.Commissions[action.payload].show = !newObj.Commissions[
@@ -41,19 +46,19 @@ function rootReducer(state = initial_state, action) {
   } else if (action.type === SUBMIT_OPERATION) {
     let newObj = JSON.parse(JSON.stringify(state));
     //this adds operation records
-    if (!newObj.Operations[action.payload.stagename]) {
-      newObj.Operations[action.payload.stagename] = {
-        [`${action.payload.uuid}`]: {
-          teamid: action.payload.teamid,
-          addpoints: action.payload.addpoints
-        }
-      };
-    } else {
-      newObj.Operations[action.payload.stagename][action.payload.uuid] = {
-        teamid: action.payload.teamid,
-        addpoints: action.payload.addpoints
-      };
-    }
+    // if (!newObj.Operations[action.payload.stagename]) {
+    //   newObj.Operations[action.payload.stagename] = {
+    //     [`${action.payload.uuid}`]: {
+    //       teamid: action.payload.teamid,
+    //       addpoints: action.payload.addpoints
+    //     }
+    //   };
+    // } else {
+    //   newObj.Operations[action.payload.stagename][action.payload.uuid] = {
+    //     teamid: action.payload.teamid,
+    //     addpoints: action.payload.addpoints
+    //   };
+    // }
     //TODO change later to connect to server
     //this adds tweets
     newObj.Tweets.push({
@@ -62,18 +67,16 @@ function rootReducer(state = initial_state, action) {
       Points: action.payload.addpoints
     });
     //this adds actual points
-    newObj.teamData[action.payload.teamid].score +=action.payload.addpoints;
+    //newObj.teamData[action.payload.teamid].score += action.payload.addpoints;
     return newObj;
-  }else if(action.type === DELETE_OPERATION){
+  } else if (action.type === DELETE_OPERATION) {
     let newObj = JSON.parse(JSON.stringify(state));
-    newObj.teamData[action.payload.teamid].score -= action.payload.addpoints;
-    delete newObj.Operations[action.payload.stagename][action.payload.uuid];
+    // newObj.teamData[action.payload.teamid].score -= action.payload.addpoints;
+    // delete newObj.Operations[action.payload.stagename][action.payload.uuid];
     return newObj;
-  } else if(action.type === GET_DATA){
-    console.log(action.payload);
+  } else if (action.type === GET_DATA) {
     return action.payload;
-  }
-  else {
+  } else {
     return JSON.parse(JSON.stringify(state));
   }
 }
