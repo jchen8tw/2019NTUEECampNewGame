@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Segment, List, Header, Feed, Button } from "semantic-ui-react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import RankListItem from "../Component/RankListItem";
 import Tweet from "../Component/Tweet";
 import { connect } from "react-redux";
@@ -80,7 +80,14 @@ class Dashboard extends Component {
             </List>
           </Segment>
           <Segment>
-            <Button fluid color="facebook" as={Link} to='/login'>Login</Button>
+            <Button fluid color="facebook" as={Link} to="/login">
+              Login
+            </Button>
+          </Segment>
+          <Segment>
+            <Button fluid color="google plus" as={Link} to="/commission">
+              Commission
+            </Button>
           </Segment>
         </Grid.Column>
         <Grid.Column width={6}>

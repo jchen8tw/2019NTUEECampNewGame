@@ -29,12 +29,12 @@ io.on("connection", function(socket) {
       };
     }
     dbdata.teamData[data.teamid].score += data.addpoints;
-    io.emit("operation_updated", {});
+    io.emit("operation_updated",data);
   });
   socket.on("delete_operation", data => {
     dbdata.teamData[data.teamid].score -= data.addpoints;
     delete dbdata.Operations[data.stagename][data.uuid];
-    io.emit("operation_updated", {});
+    io.emit("operation_updated", data);
   });
 });
 

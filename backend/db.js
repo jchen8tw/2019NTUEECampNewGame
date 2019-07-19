@@ -3,7 +3,13 @@ const initial_state = {
       f: { show: true },
       u: { show: true },
       c: { show: true },
-      k: { show: false }
+      k: { show: true },
+      y: { show: true },
+      o: { show: true },
+      uu: { show: true },
+      l: { show: true },
+      a: { show: true },
+      h: { show: true }
     },
     teamData: {
       1: { score: 0 },

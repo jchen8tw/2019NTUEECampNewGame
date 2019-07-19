@@ -28,9 +28,9 @@ class Operations extends Component {
   componentWillMount() {
     const ws = io("/");
     this.ws = ws;
-    fetch("/api")
-      .then(res => res.json())
-      .then(res => this.props.get_data(res));
+    // fetch("/api")
+    //   .then(res => res.json())
+    //   .then(res => this.props.get_data(res));
     ws.on("operation_updated", () => {
       fetch("/api")
         .then(res => res.json())
