@@ -9,7 +9,7 @@ const initial_state = {
       我不入地獄誰入地獄: { show: false },
       血盟騎士之戰: { show: false },
       發大財: { show: false },
-      場控的請求: { show: false }
+      委託人的請求: { show: false }
     },
     teamData: {
       1: { score: 0 },
