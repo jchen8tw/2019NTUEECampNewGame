@@ -1,15 +1,15 @@
 const initial_state = {
     Commissions: {
-      f: { show: true },
-      u: { show: true },
-      c: { show: true },
-      k: { show: true },
-      y: { show: true },
-      o: { show: true },
-      uu: { show: true },
-      l: { show: true },
-      a: { show: true },
-      h: { show: true }
+      一無是處: { show: false },
+      卡片收集家: { show: false },
+      非洲血統: { show: false },
+      我全都要: { show: false },
+      死神的信徒: { show: false },
+      十尾狩獵: { show: false },
+      我不入地獄誰入地獄: { show: false },
+      血盟騎士之戰: { show: false },
+      發大財: { show: false },
+      場控的請求: { show: false }
     },
     teamData: {
       1: { score: 0 },
@@ -24,14 +24,14 @@ const initial_state = {
       10: { score: 0 }
     },
     Tweets: [
-      { teamName: "team1", StageName: "stage1", Points: 10,time: new Date('2019-07-20T12:18:47.480Z') },
-      { teamName: "team2", StageName: "stage2", Points: -10,time: new Date('2019-07-20T12:20:50.480Z')}
+      // { teamName: "team1", StageName: "stage1", Points: 10,time: new Date('2019-07-20T12:18:47.480Z') },
+      // { teamName: "team2", StageName: "stage2", Points: -10,time: new Date('2019-07-20T12:20:50.480Z')}
     ],
     Operations: {
-      商店: {
-        "b2d48c20-520f-42e5-9774-fa7e07a3805b": { teamid: 1, addpoints: 10 },
-        "e1f8180b-a65d-4456-b915-25dc26dfd97e": { teamid: 2, addpoints: -10 }
-       }
+      // 商店: {
+      //   "b2d48c20-520f-42e5-9774-fa7e07a3805b": { teamid: 1, addpoints: 10 },
+      //   "e1f8180b-a65d-4456-b915-25dc26dfd97e": { teamid: 2, addpoints: -10 }
+      //  }
     }
 };
 module.exports = initial_state;
