@@ -103,7 +103,7 @@ class Dashboard extends Component {
 
     return (
       <Grid textAlign="center" style={{ height: "100vh" }}>
-        <Grid.Column width={6}>
+        <Grid.Column mobile={16} computer={6}>
           <Segment raised>
             <Header as="h1">Rank</Header>
             <List relaxed divided>
@@ -127,7 +127,7 @@ class Dashboard extends Component {
             </Button>
           </Segment>
         </Grid.Column>
-        <Grid.Column width={6}>
+        <Grid.Column mobile={16} computer={6}>
           <Grid.Row>
             <Segment raised>
               <Header as="h1">Commissions</Header>
@@ -152,8 +152,8 @@ class Dashboard extends Component {
           </Grid.Row>
         </Grid.Column>
         <Grid.Row>
-          <Grid.Column width={6} />
-          <Grid.Column width={6} />
+          <Grid.Column mobile={16} computer={6} />
+          <Grid.Column mobile={16} computer={6} />
         </Grid.Row>
         <Grid.Row />
       </Grid>
