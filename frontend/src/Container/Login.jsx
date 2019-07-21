@@ -73,9 +73,9 @@ const StageOptions = [
     value: '發大財'
   },
   {
-    key: '場控的請求',
-    text: '場控的請求',
-    value: '場控的請求'
+    key: '委託人的請求',
+    text: '委託人的請求',
+    value: '委託人的請求'
   }
 ]
 class Login extends Component {
