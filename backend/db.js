@@ -24,14 +24,14 @@ const initial_state = {
       10: { score: 0 }
     },
     Tweets: [
-      { teamName: "team1", StageName: "stage1", Points: 10 },
-      { teamName: "team2", StageName: "stage2", Points: -10 }
+      { teamName: "team1", StageName: "stage1", Points: 10,time: new Date('2019-07-20T12:18:47.480Z') },
+      { teamName: "team2", StageName: "stage2", Points: -10,time: new Date('2019-07-20T12:20:50.480Z')}
     ],
     Operations: {
-      // 贛: {
-      //   "b2d48c20-520f-42e5-9774-fa7e07a3805b": { teamid: 1, addpoints: 10 },
-      //   "e1f8180b-a65d-4456-b915-25dc26dfd97e": { teamid: 2, addpoints: -10 }
-      // }
+      商店: {
+        "b2d48c20-520f-42e5-9774-fa7e07a3805b": { teamid: 1, addpoints: 10 },
+        "e1f8180b-a65d-4456-b915-25dc26dfd97e": { teamid: 2, addpoints: -10 }
+       }
     }
 };
 module.exports = initial_state;

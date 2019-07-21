@@ -36,7 +36,7 @@ const initial_state = {};
 //   }
 // };
 function rootReducer(state = initial_state, action) {
-  console.log(state);
+  //console.log(state);
   if (action.type === DISPLAY_COMMISSION) {
     let newObj = JSON.parse(JSON.stringify(state));
     newObj.Commissions[action.payload].show = !newObj.Commissions[
@@ -61,11 +61,11 @@ function rootReducer(state = initial_state, action) {
     // }
     //TODO change later to connect to server
     //this adds tweets
-    newObj.Tweets.push({
-      teamName: action.payload.teamid,
-      StageName: action.payload.stagename,
-      Points: action.payload.addpoints
-    });
+    // newObj.Tweets.push({
+    //   teamName: action.payload.teamid,
+    //   StageName: action.payload.stagename,
+    //   Points: action.payload.addpoints
+    // });
     //this adds actual points
     //newObj.teamData[action.payload.teamid].score += action.payload.addpoints;
     return newObj;

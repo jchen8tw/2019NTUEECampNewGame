@@ -37,28 +37,65 @@ const mapDispatchToProps = dispatch => {
 class Dashboard extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      Commissions: null,
+      teamData: null,
+      Tweets: null
+    };
   }
   componentWillMount() {
     const ws = io.connect("/");
-    fetch("/api")
-      .then(res => res.json())
-      .then(res => {
-        this.props.get_data(res);
-      });
-    ws.on("operation_updated", data => {
-      console.log("updated");
-      fetch("/api")
-        .then(res => res.json())
-        .then(res => {
-          this.props.get_data(res);
-        });
+    ws.emit("get_dashboard");
+    ws.on("dashboard_got", data => {
+      this.setState(() => data);
     });
+    ws.on("score_update", data => {
+      this.setState(() => data);
+    });
+    ws.on("commission_display_updated", data => {
+      this.setState(state => {
+        let newState = JSON.parse(JSON.stringify(state));
+        newState.Commissions[data].show = !newState.Commissions[data].show;
+        return newState;
+      });
+    });
+    ws.on("tweets_updated", data => {
+      this.setState(state => {
+        let newState = JSON.parse(JSON.stringify(state));
+        newState.Tweets.push({
+          teamName: data.teamName,
+          StageName: data.StageName,
+          Points: data.Points,
+          time: data.time
+        });
+        if (newState.Tweets.length > 4) {
+          newState.Tweets.shift();
+        }
+        return newState;
+      });
+    });
+
+    // fetch("/api")
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     this.props.get_data(res);
+    //   });
+    // ws.on("operation_updated", data => {
+    //   console.log("updated");
+    //   fetch("/api")
+    //     .then(res => res.json())
+    //     .then(res => {
+    //       this.props.get_data(res);
+    //     });
+    // });
   }
   render() {
-    const { Commissions, teamData, Tweets } = this.props;
+    const { Commissions, teamData, Tweets } = this.state;
     if (!Commissions || !teamData || !Tweets) {
       return <p>loading</p>;
     }
+    let tweets = Tweets.map(tweet => <Tweet {...tweet} />);
+    tweets = tweets.reverse();
     const teamRank = Object.keys(teamData).sort(
       (a, b) => teamData[b].score - teamData[a].score
     );
@@ -106,14 +143,10 @@ class Dashboard extends Component {
               </List>
             </Segment>
           </Grid.Row>
-          <Grid.Row style={{ margin: "10vh 0vh" }}>
+          <Grid.Row style={{ margin: "1em 0em" }}>
             <Segment>
               {/* <List style={{ display: "flex", flexWrap: "nowrap" }}> */}
-              <Feed>
-                {Tweets.map(tweet => (
-                  <Tweet {...tweet} />
-                ))}
-              </Feed>
+              <Feed>{tweets}</Feed>
               {/* </List> */}
             </Segment>
           </Grid.Row>
