@@ -28,6 +28,7 @@ io.on("connection", function(socket) {
         stagename: this.props.match.params.stagename,
         time: new Date()
     } */
+    console.log(data);
     const this_uuid = uuid();
     const this_time = new Date();
     if (!dbdata.Operations[data.stagename]) {

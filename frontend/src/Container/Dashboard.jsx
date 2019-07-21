@@ -24,16 +24,16 @@ import { get_data } from "../redux/actions";
 //   c: {show: true },
 //   k: {show: false }
 // };
-const mapStateToProps = state => {
-  return {
-    Commissions: state.Commissions,
-    teamData: state.teamData,
-    Tweets: state.Tweets
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return { get_data: data => dispatch(get_data(data)) };
-};
+// const mapStateToProps = state => {
+//   return {
+//     Commissions: state.Commissions,
+//     teamData: state.teamData,
+//     Tweets: state.Tweets
+//   };
+// };
+// const mapDispatchToProps = dispatch => {
+//   return { get_data: data => dispatch(get_data(data)) };
+// };
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -160,8 +160,8 @@ class Dashboard extends Component {
     );
   }
 }
-const connectedDashboard = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Dashboard);
-export default connectedDashboard;
+// const connectedDashboard = connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(Dashboard);
+export default Dashboard;

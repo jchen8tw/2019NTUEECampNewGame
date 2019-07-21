@@ -4,7 +4,7 @@ export default props => {
   const { teamName, StageName, Points, time } = props;
 
   const timeago = Math.abs(new Date(time) - new Date());
-  //console.log(timeago);
+  console.log(timeago);
   return (
     <Feed.Event>
       <Feed.Label icon="dollar" />
