@@ -43,7 +43,7 @@ class Operations extends Component {
       //console.log(data);
       this.setState(() => ({ operations: data }));
     });
-    ws.on("operation_added", data => {
+    ws.on(`operation_added_${this.props.match.params.stagename}`, data => {
       this.setState(state => ({
         operations: { ...state.operations, ...data }
       }));

@@ -56,7 +56,7 @@ io.on("connection", function(socket) {
         dbdata.Tweets.shift();
     }
     //console.log(this_uuid);
-    io.emit("operation_added", {
+    io.emit(`operation_added_${data.stagename}`, {
       [`${this_uuid}`]: {
         teamid: data.teamid,
         addpoints: data.addpoints,
