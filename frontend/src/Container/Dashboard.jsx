@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Grid, Segment, List, Header, Feed, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import RankListItem from "../Component/RankListItem";
+import CommissionBoard from '../Component/CommissionBoard';
 import Tweet from "../Component/Tweet";
 import { connect } from "react-redux";
 import io from "socket.io-client";
@@ -129,19 +130,7 @@ class Dashboard extends Component {
         </Grid.Column>
         <Grid.Column mobile={16} computer={6}>
           <Grid.Row>
-            <Segment raised>
-              <Header as="h1">Commissions</Header>
-              <List relaxed divided>
-                {Object.keys(Commissions).map(
-                  commission =>
-                    Commissions[commission].show && (
-                      <List.Item>
-                        <List.Header as="h2">{commission}</List.Header>
-                      </List.Item>
-                    )
-                )}
-              </List>
-            </Segment>
+            <CommissionBoard Commissions={this.state.Commissions} />
           </Grid.Row>
           <Grid.Row style={{ margin: "1em 0em" }}>
             <Segment>

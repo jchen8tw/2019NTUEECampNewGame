@@ -11,7 +11,7 @@ export default function(props) {
         </GridColumn>
         <GridColumn width={1} />
         <GridColumn width={10} verticalAlign="middle" textAlign="left">
-          <List.Header as="h1">Team{teamid}</List.Header>
+          <List.Header as="h1">第{teamid}小隊</List.Header>
         </GridColumn>
         <GridColumn width={1} style={{display: 'flex', flexWrap: 'nowrap', alignItems: 'center'}}>
           <Icon name="dollar" size="big" />

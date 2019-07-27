@@ -7,9 +7,19 @@ const initial_state = {
       死神的信徒: { show: false },
       十尾狩獵: { show: false },
       我不入地獄誰入地獄: { show: false },
-      血盟騎士之戰: { show: false },
+      矛盾大對決: { show: false },
       發大財: { show: false },
-      委託人的請求: { show: false }
+      委託人的請求: { show: false },
+      [`三隻小豬怕.jpg`]: { show: false },
+      一葉知秋: { show: false },
+      事不過三: { show: false },
+      大錯特錯: { show: false },
+      你累了嗎: { show: false },
+      下沉氣流: { show: false },
+      懶驢打滾: { show: false },
+      傾家蕩產: { show: false },
+      '首領討伐(不限一次)': { show: false },
+      Treasure: { show: false }
     },
     teamData: {
       1: { score: 0 },
