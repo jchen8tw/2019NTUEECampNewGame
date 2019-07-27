@@ -10,10 +10,10 @@ export default function(props) {
           <Gravatar rank={rank} />
         </GridColumn>
         <GridColumn width={1} />
-        <GridColumn width={10} verticalAlign="middle" textAlign="left">
+        <GridColumn width={8} verticalAlign="middle" textAlign="left">
           <List.Header as="h1">第{teamid}小隊</List.Header>
         </GridColumn>
-        <GridColumn width={1} style={{display: 'flex', flexWrap: 'nowrap', alignItems: 'center'}}>
+        <GridColumn width={5} style={{display: 'flex', flexWrap: 'nowrap', alignItems: 'center'}}>
           <Icon name="dollar" size="big" />
           <Header as="h2">{score}</Header>
         </GridColumn>
